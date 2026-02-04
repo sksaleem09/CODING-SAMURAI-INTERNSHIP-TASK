@@ -1,0 +1,683 @@
+/* ============================================
+   ATM BANKING SYSTEM - PROFESSIONAL STYLING
+   ============================================ */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ATM Color Palette */
+    --atm-dark-blue: #0f1929;
+    --atm-blue: #1e3a5f;
+    --atm-light-blue: #2d5a8a;
+    --atm-accent: #4a90e2;
+    --atm-green: #2ecc71;
+    --atm-red: #e74c3c;
+    --atm-yellow: #f39c12;
+    --atm-white: #ffffff;
+    --atm-gray: #95a5a6;
+    --atm-dark-gray: #34495e;
+    --atm-black: #000000;
+    
+    /* Glass Effect */
+    --glass-bg: rgba(15, 25, 45, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.5);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+body {
+    font-family: 'Roboto', 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f1929 0%, #1e3a5f 50%, #0f1929 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ATM Machine Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0f1929 0%, #1e3a5f 100%);
+    background-size: 100% 100%;
+    z-index: -1;
+    animation: backgroundPulse 10s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* ATM Container */
+.atm-container {
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+    max-height: 700px;
+    position: relative;
+    background: var(--atm-dark-blue);
+    border-radius: 20px;
+    box-shadow: 
+        var(--shadow-xl),
+        inset 0 0 100px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(74, 144, 226, 0.3);
+    border: 3px solid var(--atm-blue);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ATM Screen with Glass Overlay */
+.atm-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.atm-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Screen Content */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+    animation: screenSlideIn 0.4s ease;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes screenSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.screen-content {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Typography */
+.atm-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--atm-white);
+    text-shadow: 
+        0 0 20px rgba(74, 144, 226, 0.5),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(74, 144, 226, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+    50% { text-shadow: 0 0 30px rgba(74, 144, 226, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+}
+
+.screen-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--atm-white);
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.atm-logo {
+    margin-bottom: 50px;
+}
+
+.bank-logo {
+    font-size: 4rem;
+    margin-top: 10px;
+    filter: drop-shadow(0 0 10px rgba(74, 144, 226, 0.5));
+}
+
+/* ATM Buttons - Rectangular, 3D Effect */
+.atm-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 18px 30px;
+    margin: 12px auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--atm-white);
+    background: linear-gradient(145deg, var(--atm-light-blue), var(--atm-blue));
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: 
+        var(--shadow-md),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.atm-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.atm-button:hover::before {
+    left: 100%;
+}
+
+.atm-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        var(--shadow-lg),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(74, 144, 226, 0.4);
+    background: linear-gradient(145deg, var(--atm-accent), var(--atm-light-blue));
+}
+
+.atm-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        var(--shadow-sm),
+        inset 0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.atm-button.primary {
+    background: linear-gradient(145deg, var(--atm-light-blue), var(--atm-blue));
+}
+
+.atm-button.primary:hover {
+    background: linear-gradient(145deg, var(--atm-accent), var(--atm-light-blue));
+}
+
+.atm-button.secondary {
+    background: linear-gradient(145deg, var(--atm-dark-gray), var(--atm-black));
+}
+
+.atm-button.secondary:hover {
+    background: linear-gradient(145deg, var(--atm-gray), var(--atm-dark-gray));
+}
+
+.button-icon {
+    font-size: 1.3rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.button-text {
+    font-weight: 600;
+}
+
+/* Button Groups */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.menu-buttons {
+    margin-bottom: 30px;
+}
+
+.menu-btn {
+    max-width: 350px;
+}
+
+/* Fast Cash Section */
+.fast-cash-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+}
+
+.fast-cash-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--atm-white);
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.fast-cash-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.fast-cash-btn {
+    max-width: 120px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    background: linear-gradient(145deg, var(--atm-green), #27ae60);
+}
+
+.fast-cash-btn:hover {
+    background: linear-gradient(145deg, #27ae60, var(--atm-green));
+    box-shadow: 
+        var(--shadow-lg),
+        0 0 20px rgba(46, 204, 113, 0.4);
+}
+
+/* Form Elements */
+.form-group {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--atm-white);
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.atm-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+    color: var(--atm-white);
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--atm-blue);
+    border-radius: 8px;
+    transition: all var(--transition-normal);
+    outline: none;
+}
+
+.atm-input:focus {
+    border-color: var(--atm-accent);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 0 15px rgba(74, 144, 226, 0.4),
+        inset 0 0 10px rgba(74, 144, 226, 0.1);
+}
+
+.atm-input::placeholder {
+    color: var(--atm-gray);
+    opacity: 0.6;
+}
+
+.pin-input {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 8px;
+    font-weight: 600;
+}
+
+/* Account Info & Balance Display */
+.account-info {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid var(--glass-border);
+}
+
+.account-info p {
+    color: var(--atm-white);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.highlight {
+    color: var(--atm-yellow);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+.current-balance {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid var(--glass-border);
+}
+
+.current-balance p {
+    color: var(--atm-white);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.balance-display {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 30px 0;
+    border: 2px solid var(--glass-border);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.balance-item:last-child {
+    border-bottom: none;
+}
+
+.balance-item.main-balance {
+    margin-top: 20px;
+    padding-top: 25px;
+    border-top: 2px solid var(--atm-accent);
+}
+
+.balance-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--atm-white);
+}
+
+.balance-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--atm-yellow);
+}
+
+.balance-amount {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--atm-green);
+    text-shadow: 
+        0 0 20px rgba(46, 204, 113, 0.6),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: balancePulse 2s ease-in-out infinite;
+}
+
+@keyframes balancePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.info-text {
+    color: var(--atm-gray);
+    font-size: 0.95rem;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    border-radius: 20px;
+}
+
+.loading-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(74, 144, 226, 0.3);
+    border-top-color: var(--atm-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: var(--atm-white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+/* Alert/Notification System */
+.alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 18px 24px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(10px);
+    animation: alertSlideIn 0.4s ease, alertFadeOut 0.4s ease 2.6s forwards;
+    border-left: 4px solid;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+    color: var(--atm-white);
+}
+
+.alert.success {
+    background: rgba(46, 204, 113, 0.9);
+    border-left-color: var(--atm-green);
+}
+
+.alert.error {
+    background: rgba(231, 76, 60, 0.9);
+    border-left-color: var(--atm-red);
+}
+
+.alert.info {
+    background: rgba(74, 144, 226, 0.9);
+    border-left-color: var(--atm-accent);
+}
+
+.alert.warning {
+    background: rgba(243, 156, 18, 0.9);
+    border-left-color: var(--atm-yellow);
+}
+
+.alert-icon {
+    font-size: 1.5rem;
+}
+
+.alert-message {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@keyframes alertSlideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes alertFadeOut {
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .atm-container {
+        height: 95vh;
+        max-height: none;
+        border-radius: 0;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    .atm-title {
+        font-size: 2rem;
+    }
+    
+    .screen-title {
+        font-size: 1.5rem;
+    }
+    
+    .atm-button {
+        max-width: 100%;
+        padding: 16px 24px;
+        font-size: 1rem;
+    }
+    
+    .fast-cash-buttons {
+        gap: 8px;
+    }
+    
+    .fast-cash-btn {
+        max-width: 90px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .balance-amount {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .atm-container {
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .screen {
+        padding: 15px;
+    }
+    
+    .atm-title {
+        font-size: 1.5rem;
+    }
+    
+    .screen-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .fast-cash-btn {
+        max-width: 70px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .atm-container {
+        box-shadow: none;
+        border: none;
+    }
+}

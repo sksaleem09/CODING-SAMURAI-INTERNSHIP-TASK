@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Banking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ATM Machine Background Container -->
+    <div class="atm-container">
+        <!-- ATM Screen with Glass Overlay Effect -->
+        <div class="atm-screen" id="atmScreen">
+            <!-- Welcome Screen -->
+            <div class="screen active" id="welcomeScreen">
+                <div class="screen-content">
+                    <div class="atm-logo">
+                        <h1 class="atm-title">ATM Banking System</h1>
+                        <div class="bank-logo">🏦</div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnCreateAccount">
+                            <span class="button-icon">📝</span>
+                            <span class="button-text">Create Account</span>
+                        </button>
+                        <button class="atm-button primary" id="btnLogin">
+                            <span class="button-icon">🔐</span>
+                            <span class="button-text">Login</span>
+                        </button>
+                        <button class="atm-button secondary" id="btnExit">
+                            <span class="button-icon">🚪</span>
+                            <span class="button-text">Exit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Account Screen -->
+            <div class="screen" id="createAccountScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Create New Account</h2>
+                    <div class="form-group">
+                        <label for="fullName">Full Name (Optional):</label>
+                        <input type="text" id="fullName" class="atm-input" placeholder="Enter your name">
+                    </div>
+                    <p class="info-text">Click 'Generate Account' to get your Account Number.</p>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnGenerateAccount">Generate Account</button>
+                        <button class="atm-button secondary" id="btnBackFromCreate">Back</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIN Generation Screen -->
+            <div class="screen" id="pinGenerationScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Set Your 4-Digit PIN</h2>
+                    <div class="account-info">
+                        <p>Account Number: <span id="pinAccountNumber" class="highlight"></span></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pinInput">Enter PIN:</label>
+                        <input type="password" id="pinInput" class="atm-input pin-input" maxlength="4" placeholder="0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="pinConfirm">Confirm PIN:</label>
+                        <input type="password" id="pinConfirm" class="atm-input pin-input" maxlength="4" placeholder="0000">
+                    </div>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnSetPin">Set PIN</button>
+                        <button class="atm-button secondary" id="btnCancelPin">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Screen -->
+            <div class="screen" id="loginScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">ATM Login</h2>
+                    <div class="form-group">
+                        <label for="loginAccount">Account Number:</label>
+                        <input type="text" id="loginAccount" class="atm-input" placeholder="Enter account number">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPin">PIN:</label>
+                        <input type="password" id="loginPin" class="atm-input pin-input" maxlength="4" placeholder="Enter 4-digit PIN">
+                    </div>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnLoginSubmit">Login</button>
+                        <button class="atm-button secondary" id="btnBackFromLogin">Back</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Screen -->
+            <div class="screen" id="menuScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Welcome! Choose an option:</h2>
+                    <div class="button-group menu-buttons">
+                        <button class="atm-button primary menu-btn" id="btnBalance">
+                            <span class="button-icon">💰</span>
+                            <span class="button-text">Balance Enquiry</span>
+                        </button>
+                        <button class="atm-button primary menu-btn" id="btnDeposit">
+                            <span class="button-icon">💵</span>
+                            <span class="button-text">Deposit</span>
+                        </button>
+                        <button class="atm-button primary menu-btn" id="btnWithdraw">
+                            <span class="button-icon">💸</span>
+                            <span class="button-text">Withdraw</span>
+                        </button>
+                    </div>
+                    
+                    <div class="fast-cash-section">
+                        <h3 class="fast-cash-title">Fast Cash:</h3>
+                        <div class="fast-cash-buttons">
+                            <button class="atm-button fast-cash-btn" data-amount="50">₹50</button>
+                            <button class="atm-button fast-cash-btn" data-amount="100">₹100</button>
+                            <button class="atm-button fast-cash-btn" data-amount="200">₹200</button>
+                            <button class="atm-button fast-cash-btn" data-amount="500">₹500</button>
+                            <button class="atm-button fast-cash-btn" data-amount="1000">₹1000</button>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="atm-button secondary" id="btnLogout">Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance Screen -->
+            <div class="screen" id="balanceScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Balance Enquiry</h2>
+                    <div class="balance-display">
+                        <div class="balance-item">
+                            <span class="balance-label">Account Number:</span>
+                            <span class="balance-value" id="balanceAccountNumber"></span>
+                        </div>
+                        <div class="balance-item main-balance">
+                            <span class="balance-label">Current Balance:</span>
+                            <span class="balance-amount" id="balanceAmount">₹0.00</span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnBackToMenu">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deposit Screen -->
+            <div class="screen" id="depositScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Deposit Money</h2>
+                    <div class="current-balance">
+                        <p>Current Balance: <span id="depositCurrentBalance" class="highlight">₹0.00</span></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="depositAmount">Enter Amount to Deposit:</label>
+                        <input type="number" id="depositAmount" class="atm-input" placeholder="0.00" step="0.01" min="0.01">
+                    </div>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnDepositSubmit">Deposit</button>
+                        <button class="atm-button secondary" id="btnBackToMenuFromDeposit">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Withdraw Screen -->
+            <div class="screen" id="withdrawScreen">
+                <div class="screen-content">
+                    <h2 class="screen-title">Withdraw Money</h2>
+                    <div class="current-balance">
+                        <p>Current Balance: <span id="withdrawCurrentBalance" class="highlight">₹0.00</span></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawAmount">Enter Amount to Withdraw:</label>
+                        <input type="number" id="withdrawAmount" class="atm-input" placeholder="0.00" step="0.01" min="0.01">
+                    </div>
+                    <div class="button-group">
+                        <button class="atm-button primary" id="btnWithdrawSubmit">Withdraw</button>
+                        <button class="atm-button secondary" id="btnBackToMenuFromWithdraw">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Custom Alert/Notification System -->
+    <div class="alert-container" id="alertContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
